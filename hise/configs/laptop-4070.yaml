@@ -1,0 +1,5 @@
+device: cuda
+model: nomic-ai/nomic-embed-text-v1.5
+batch_size: 8
+max_length: 512
+purpose: prototype

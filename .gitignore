@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Model and experiment outputs
+checkpoints/
+.checkpoints/
+outputs/
+artifacts/
+wandb/
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# Jupyter and local tooling
+.ipynb_checkpoints/
+.vscode/
+
+# Node/document generation noise
+node_modules/
+npm-debug.log*
+~$*.docx
+
+# OS files
+.DS_Store
+Thumbs.db

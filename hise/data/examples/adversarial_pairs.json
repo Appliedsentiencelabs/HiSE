@@ -1,0 +1,12 @@
+{
+  "query": "What is the revenue situation?",
+  "positive": {
+    "text": "Revenue increased 47% year over year.",
+    "path": ["Annual Report", "Risk Factors", "Revenue Concentration Risk"]
+  },
+  "negative": {
+    "text": "Revenue increased 47% year over year.",
+    "path": ["Annual Report", "Executive Summary", "Key Highlights"]
+  },
+  "purpose": "The text is identical; only structural role differs."
+}
