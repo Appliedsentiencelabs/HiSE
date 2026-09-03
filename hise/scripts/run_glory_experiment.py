@@ -83,6 +83,27 @@ def check_llm_service() -> None:
         log({'event': 'llm_service_error', 'url': LLM_URL, 'model': LLM_MODEL, 'error': detail})
 
 
+def check_llm_inference() -> None:
+    endpoint = LLM_URL.rsplit('/models', 1)[0] + '/chat/completions'
+    payload = {
+        'model': LLM_MODEL,
+        'messages': [{'role': 'user', 'content': 'Reply with exactly SERVER_OK.'}],
+        'max_tokens': 8,
+        'temperature': 0.0,
+        'chat_template_kwargs': {'enable_thinking': False},
+    }
+    started = time.perf_counter()
+    request = Request(endpoint, data=json.dumps(payload).encode('utf-8'), headers={'Content-Type': 'application/json'})
+    try:
+        with urlopen(request, timeout=60) as response:
+            result = json.load(response)
+        content = result['choices'][0]['message']['content']
+        log({'event': 'llm_inference_check', 'url': endpoint, 'model': LLM_MODEL, 'response': content, 'latency_ms': round((time.perf_counter() - started) * 1000, 2)})
+    except (HTTPError, URLError, KeyError, IndexError) as error:
+        detail = error.read().decode() if isinstance(error, HTTPError) else str(error)
+        log({'event': 'llm_inference_error', 'url': endpoint, 'model': LLM_MODEL, 'error': detail})
+
+
 def main() -> None:
     case = json.loads(EXAMPLE.read_text(encoding='utf-8'))
     query = 'What are the financial risks?'
@@ -95,6 +116,7 @@ def main() -> None:
     baseline = run_condition('content_only', query, candidates, 'risk')
     structural = run_condition('path_prefixed_control', query, structural_candidates, 'risk')
     check_llm_service()
+    check_llm_inference()
     print(json.dumps({'baseline': baseline, 'path_prefixed_control': structural, 'log_file': str(OUTPUT)}, indent=2))
 
 
