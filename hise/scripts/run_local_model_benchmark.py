@@ -55,8 +55,18 @@ def main() -> None:
         vectors.extend(embed(texts[offset:offset + BATCH_SIZE], tokenizer, model))
     embedding_seconds = time.perf_counter() - started
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    summary = {'event': 'benchmark_summary', 'model': MODEL_PATH, 'device': DEVICE, 'cases': len(rows), 'batch_size': BATCH_SIZE, 'embedding_seconds': round(embedding_seconds, 4)}
+    summary = {
+        'event': 'benchmark_summary',
+        'model': os.getenv('HISE_LOCAL_MODEL_NAME', 'sentence-transformers/all-MiniLM-L6-v2'),
+        'model_path': MODEL_PATH,
+        'device': DEVICE,
+        'gpu': torch.cuda.get_device_name(0) if DEVICE == 'cuda' else 'cpu',
+        'cases': len(rows),
+        'batch_size': BATCH_SIZE,
+        'embedding_seconds': round(embedding_seconds, 4),
+    }
     false_positives = 0
+    format_counts: dict[str, list[int]] = {}
     with OUTPUT.open('w', encoding='utf-8') as stream:
         stream.write(json.dumps(summary) + '\n')
         cursor = 0
@@ -71,8 +81,13 @@ def main() -> None:
             ranked = sorted(scored, key=lambda item: (-item['cosine'], item['id']))
             is_false_positive = ranked[0]['id'] != row['relevant_id']
             false_positives += is_false_positive
+            counts = format_counts.setdefault(row['format'], [0, 0])
+            counts[0] += 1
+            counts[1] += int(is_false_positive)
             stream.write(json.dumps({**row, 'scores': scored, 'ranked_ids': [item['id'] for item in ranked], 'top_is_false_positive': is_false_positive}) + '\n')
-    print(json.dumps({**summary, 'false_positives': false_positives, 'false_positive_rate': round(false_positives / len(rows), 4), 'output': str(OUTPUT)}, indent=2))
+        for format_name, (count, format_false_positives) in sorted(format_counts.items()):
+            stream.write(json.dumps({'event': 'format_summary', 'format': format_name, 'cases': count, 'false_positives': format_false_positives, 'false_positive_rate': round(format_false_positives / count, 4)}) + '\n')
+    print(json.dumps({**summary, 'false_positives': false_positives, 'false_positive_rate': round(false_positives / len(rows), 4), 'format_summary': format_counts, 'output': str(OUTPUT)}, indent=2))
 
 
 if __name__ == '__main__':
