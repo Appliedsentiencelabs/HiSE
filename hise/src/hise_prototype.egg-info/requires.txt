@@ -1,0 +1,8 @@
+torch>=2.0
+
+[notebook]
+nbformat>=5.0
+nbclient>=0.10
+
+[test]
+pytest>=8.0

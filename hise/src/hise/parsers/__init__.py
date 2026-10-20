@@ -1,17 +1,20 @@
+"""Format parsers for HiSE structural-address extraction."""
+
+from __future__ import annotations
+
 import json
 import re
 from collections.abc import Mapping, Sequence
 from html.parser import HTMLParser
 
-from .address import StructuralAddress
-
+from ..address import StructuralAddress
 
 _HEADING = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 
 
 def parse_markdown(markdown: str) -> list[tuple[str, StructuralAddress]]:
     """Return one structural address per non-empty Markdown line."""
-    result = []
+    result: list[tuple[str, StructuralAddress]] = []
     heading_stack: list[str] = []
     sibling_counts: dict[str, int] = {}
     for position, line in enumerate(markdown.splitlines()):
@@ -37,7 +40,7 @@ def parse_markdown(markdown: str) -> list[tuple[str, StructuralAddress]]:
 
 def parse_table(rows: Sequence[Sequence[str]]) -> list[tuple[str, StructuralAddress]]:
     """Represent each table cell with row, column, and table-parent coordinates."""
-    result = []
+    result: list[tuple[str, StructuralAddress]] = []
     parent_id = StructuralAddress.stable_parent_id("table")
     position = 0
     for row_index, row in enumerate(rows):
@@ -51,12 +54,14 @@ def parse_json(value: object, path: str = "root", position: int = 0, depth: int 
     """Flatten JSON leaves while retaining key-path depth and parent identity."""
     result: list[tuple[str, StructuralAddress]] = []
     if isinstance(value, Mapping):
-        for sibling, (key, child) in enumerate(value.items()):
-            result.extend(parse_json(child, f"{path}.{key}", position, depth + 1))
+        for key, child in value.items():
+            child_path = f"{path}.{key}"
+            result.extend(parse_json(child, child_path, position, depth + 1))
             position += len(result)
     elif isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
         for sibling, child in enumerate(value):
-            result.extend(parse_json(child, f"{path}[{sibling}]", position, depth + 1))
+            child_path = f"{path}[{sibling}]"
+            result.extend(parse_json(child, child_path, position, depth + 1))
             position += len(result)
     else:
         parent = path.rsplit(".", 1)[0].rsplit("[", 1)[0]
@@ -97,3 +102,11 @@ def parse_html(html: str) -> list[tuple[str, StructuralAddress]]:
 
 def parse_json_text(value: str) -> list[tuple[str, StructuralAddress]]:
     return parse_json(json.loads(value))
+
+__all__ = [
+    "parse_markdown",
+    "parse_table",
+    "parse_json",
+    "parse_html",
+    "parse_json_text",
+]

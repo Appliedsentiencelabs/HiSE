@@ -52,9 +52,21 @@ The prototype currently validates the structural-address mechanism. It does not 
 
 The laptop configuration is intended for parser, encoding, and small-batch experiments. The server configuration is intended for larger benchmark runs and model experiments.
 
+## Architecture decisions (reconciled)
+
+The prototype now follows a consistent architecture:
+
+- The structural signal operates on token hidden states, not on pooled `(B, 768)` embeddings.
+- SGAM is computed over token-level structural addresses inside the attention matrix before softmax.
+- The default initialization is near-zero weights with warmup, not a hard negative bias from the start.
+- The trainable set is the frozen BGE encoder plus the HiSA/SGAM structural layer, with full fine-tuning treated as a later ablation.
+- The query must carry explicit or section-context structural intent so Stage 3 negatives are actually discriminative.
+
+This design is documented in [Dcoumentation/reports/HiSE_Architecture_Decisions.md](Dcoumentation/reports/HiSE_Architecture_Decisions.md).
+
 ## Project Status
 
-The first milestone is complete: a unified structural-address schema, format-specific parser prototypes, a multi-dimensional rotary encoder, adversarial examples, and automated tests. The next milestone is baseline retrieval with the locally available Nomic embedding model, followed by structural reranking and controlled evaluation.
+The first milestone is complete: a unified structural-address schema, format-specific parser prototypes, a multi-dimensional rotary encoder, adversarial examples, and automated tests. The next milestone is a real token-level SGAM integration into the BGE attention stack, followed by structural reranking and controlled evaluation.
 
 ## License
 
