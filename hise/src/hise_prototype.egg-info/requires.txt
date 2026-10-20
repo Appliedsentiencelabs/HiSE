@@ -1,4 +1,5 @@
 torch>=2.0
+transformers>=4.40
 
 [notebook]
 nbformat>=5.0

@@ -24,11 +24,27 @@ class DirectSumSubspace(nn.Module):
         self.lambda_s = nn.Parameter(torch.ones(1) * config.lambda_s_init)
 
     def forward(self, x: torch.Tensor, structural_address: dict) -> torch.Tensor:
+        original_2d = x.dim() == 2
+        if x.dim() == 2:
+            x = x.unsqueeze(0)
+        elif x.dim() != 3:
+            raise ValueError(f"Expected embeddings to be 2D or 3D, got {tuple(x.shape)}")
+
         x_out = x.clone()
-        positions = structural_address.get("m", torch.zeros_like(x[..., 0], dtype=torch.long))
-        depths = structural_address.get("d", torch.zeros_like(x[..., 0], dtype=torch.long))
-        paths = structural_address.get("p", [[[] for _ in range(x.shape[1])] for _ in range(x.shape[0])])
-        siblings = structural_address.get("s", torch.zeros_like(x[..., 0], dtype=torch.long))
+        batch_size = x.shape[0]
+        positions = structural_address.get("m", torch.zeros(x.shape[:2], dtype=torch.long))
+        depths = structural_address.get("d", torch.zeros(x.shape[:2], dtype=torch.long))
+        paths = structural_address.get("p", [[[] for _ in range(x.shape[1])] for _ in range(batch_size)])
+        siblings = structural_address.get("s", torch.zeros(x.shape[:2], dtype=torch.long))
+
+        if positions.dim() == 1:
+            positions = positions.unsqueeze(0).expand(batch_size, -1)
+        if depths.dim() == 1:
+            depths = depths.unsqueeze(0).expand(batch_size, -1)
+        if siblings.dim() == 1:
+            siblings = siblings.unsqueeze(0).expand(batch_size, -1)
+        if batch_size == 1 and isinstance(paths, list) and len(paths) == x.shape[1] and paths and isinstance(paths[0], list) and paths[0] and isinstance(paths[0][0], list):
+            paths = [paths]
 
         if x.shape[-1] != self.config.d_model:
             raise ValueError(f"Expected x last dimension {self.config.d_model}, got {x.shape[-1]}")
@@ -44,6 +60,8 @@ class DirectSumSubspace(nn.Module):
 
         x_s = x[..., self.s_start:self.s_end]
         x_out[..., self.s_start:self.s_end] = apply_rope(x_s, self.freqs_s, (siblings * self.lambda_s).long())
+        if original_2d:
+            return x_out[0]
         return x_out
 
     def _apply_path_rotation(self, x_p: torch.Tensor, paths: list) -> torch.Tensor:

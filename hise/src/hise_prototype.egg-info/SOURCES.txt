@@ -3,6 +3,7 @@ pyproject.toml
 src/hise/__init__.py
 src/hise/__main__.py
 src/hise/address.py
+src/hise/bert_sgam.py
 src/hise/config.py
 src/hise/evaluation.py
 src/hise/injection.py
@@ -22,6 +23,7 @@ src/hise_prototype.egg-info/dependency_links.txt
 src/hise_prototype.egg-info/requires.txt
 src/hise_prototype.egg-info/top_level.txt
 tests/test_address.py
+tests/test_bert_sgam.py
 tests/test_demo.py
 tests/test_evaluation.py
 tests/test_experiment_contract.py

@@ -5,6 +5,8 @@ from transformers import BertConfig, BertModel
 from hise.address import StructuralAddress
 from hise.bert_sgam import (
     TokenLevelSGAMBias,
+    _bert_attention_mask_to_additive,
+    _bert_attention_mask_to_valid,
     attach_sgam_to_bert_attention,
     build_token_level_addresses,
     zero_weight_equivalence_gate,
@@ -65,6 +67,19 @@ def test_token_level_sgam_bias_is_zero_for_same_structure() -> None:
     bias = TokenLevelSGAMBias(depth_weight=1.0, parent_weight=2.0, sibling_weight=3.0)(addresses)
     assert bias.shape == (1, 1, 3, 3)
     assert bias[0, 0, 0, 1].item() == 0.0
+
+
+def test_extended_bert_mask_is_preserved_and_padding_is_detected() -> None:
+    additive_mask = torch.tensor([[[[0.0, 0.0, -1e9]]]])
+    converted = _bert_attention_mask_to_additive(additive_mask)
+    valid = _bert_attention_mask_to_valid(
+        additive_mask,
+        batch_size=1,
+        key_length=3,
+        device=torch.device("cpu"),
+    )
+    assert torch.equal(converted, additive_mask)
+    assert valid.tolist() == [[True, True, False]]
 
 
 def test_build_token_level_addresses_keeps_chunk_structure() -> None:

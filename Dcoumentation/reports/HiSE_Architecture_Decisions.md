@@ -6,6 +6,8 @@ This document records the design decisions that fix the prototype before buildin
 
 We use a token-level window of up to 512 tokens as the structural unit on which SGAM is computed. In a chunked retrieval system, each chunk is still a logical unit, but the SGAM bias is only non-zero when multiple tokens from the same document window share a structural relation. This is where SGAM(i, j) != 0 happens.
 
+For the first pilot, the concrete window packing proposal is documented in [Windowing Design](../Windowing_Design.md): up to three consecutive chunks, tokenizer-counted to a 512-token maximum including special tokens, with one-chunk overlap. This is a proposed protocol, not implemented evidence; it must pass the listed alignment checks before building A2 evaluation pairs.
+
 The key point is that a single chunk on its own is structurally homogeneous. If all tokens inside a chunk have the same `(d, p, s)`, then SGAM(i, j) = 0 for every pair in that chunk. To get a non-zero signal, we need at least two tokens or chunks in the same window that differ in structural address or belong to structurally related sections. Example: a heading token at depth 2 and a paragraph token at the same parent at depth 3 produce a non-zero `w_depth` and `w_parent` term; nearby sibling items produce a non-zero `w_sibling` term.
 
 This is why the correct unit is a multi-chunk window or document segment, not an isolated chunk vector.

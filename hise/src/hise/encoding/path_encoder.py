@@ -29,13 +29,19 @@ class PathEncoder(nn.Module):
         }
 
     def encode_path(self, sibling_path: list[int]) -> torch.Tensor:
-        self.last_path = list(sibling_path)
+        path = sibling_path
+        while isinstance(path, list) and len(path) == 1 and isinstance(path[0], list):
+            path = path[0]
+        path = list(path)
+        self.last_path = path
         relation = self.get_unit_relations()
         result = torch.zeros(self.d, 2, device=self.r_child.device)
         result[..., 0] = 1.0
-        for depth, sibling_idx in enumerate(sibling_path):
+        for depth, sibling_idx in enumerate(path):
             level_vector = relation["levels"][depth % self.max_depth]
-            step = complex_power(level_vector, sibling_idx + 1)
+            if not isinstance(sibling_idx, (int, float)):
+                sibling_idx = int(float(sibling_idx))
+            step = complex_power(level_vector, int(sibling_idx) + 1)
             result = complex_multiply(result, step)
         return result.view(-1)
 

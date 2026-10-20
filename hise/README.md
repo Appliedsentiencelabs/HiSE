@@ -41,6 +41,24 @@ python scripts/run_glory_experiment.py
 
 The package can be imported directly from the repo root via ``import hise`` and ``import hise.config``.
 
+## Real BGE / SGAM validation
+
+From the repository root, run the end-to-end test against the cached `BAAI/bge-base-en-v1.5` checkpoint:
+
+```powershell
+.\hise\.venv\Scripts\python.exe .\hise\scripts\run_system_validation.py
+```
+
+The test runs the package test suite and notebooks, then checks the real BGE attention hook, zero-weight equivalence, a five-window attention-shift gate, SGAM gradients, and 512-token GPU latency/memory at batch sizes 1, 8, and 32. It requires CUDA and a locally cached BGE model; it does not silently download the model. Markdown and JSON evidence are written to `Dcoumentation/reports/HiSE_System_Validation_Report.md` and `.json`.
+
+For the stricter component evidence report, run:
+
+```powershell
+.\hise\.venv\Scripts\python.exe .\hise\scripts\run_component_validation.py
+```
+
+This also records per-notebook kernel executables, checks hook activation after a fresh model reload and in train mode, reports per-sentence zero-weight equivalence and per-layer attention-shift metrics with shuffled-label controls, executes shared/per-layer SGAM optimizer steps, and compares stock-SDPA, stock-eager, and hooked GPU overhead. It requires CUDA and the locally cached model. The generated `Dcoumentation/reports/evidence_report.json` and `evidence_report.md` are component-validation evidence only; retrieval quality and training convergence are not tested.
+
 ## Current notebook sequence
 
 - `notebooks/HiSA_PreAttention_Implementation.ipynb` — pre-attention HiSA prototype and math stack

@@ -1,0 +1,14 @@
+# HiSE project requirements
+# Generated from the project venv for reproducible installs
+
+# Core runtime
+numpy==1.26.4
+pandas==2.2.2
+torch==2.7.1+cu118
+transformers==4.51.3
+nbformat>=5.0
+nbclient>=0.10
+pytest>=8.0
+
+# Project package (editable install from hise/)
+-e ./hise

@@ -1,0 +1,559 @@
+{
+  "created_at_utc": "2026-10-20T20:33:54.147718+00:00",
+  "project_checks": {
+    "unit_tests": "29 passed",
+    "notebooks": "Validated 4 notebook(s).",
+    "unit_test_exit_code": 0,
+    "notebook_validation_exit_code": 0
+  },
+  "model_id": "BAAI/bge-base-en-v1.5",
+  "model_class": "BertModel",
+  "transformers_version": "4.51.3",
+  "torch_version": "2.7.1+cu118",
+  "device": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "cuda_version": "11.8",
+  "default_attention_implementation": "sdpa",
+  "default_attention_class": "BertSdpaSelfAttention",
+  "layer_count": 12,
+  "fixed_sentence_count": 20,
+  "padded_batch_shape": [
+    20,
+    16
+  ],
+  "padded_sentence_token_lengths": [
+    12,
+    10,
+    12,
+    11,
+    11,
+    12,
+    11,
+    10,
+    13,
+    12,
+    11,
+    10,
+    11,
+    11,
+    9,
+    12,
+    11,
+    13,
+    12,
+    16
+  ],
+  "hook_call_count": 12,
+  "zero_weight_equivalence": [
+    {
+      "sentence": "The company reported higher revenue during the first quarter.",
+      "max_abs_diff": 1.385807991027832e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "Operating margin improved as manufacturing costs declined.",
+      "max_abs_diff": 1.5497207641601562e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The board approved the annual budget at its meeting.",
+      "max_abs_diff": 1.8775463104248047e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "Customer retention increased after the support program launched.",
+      "max_abs_diff": 1.7881393432617188e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The research team evaluated three retrieval architectures.",
+      "max_abs_diff": 1.9073486328125e-06,
+      "cosine": 0.9999999403953552
+    },
+    {
+      "sentence": "A new distribution center opened near the regional market.",
+      "max_abs_diff": 2.0638108253479004e-06,
+      "cosine": 0.9999998807907104
+    },
+    {
+      "sentence": "The policy requires approval from the department manager.",
+      "max_abs_diff": 1.4901161193847656e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "Energy consumption fell after the equipment upgrade.",
+      "max_abs_diff": 1.1920928955078125e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The product roadmap includes a redesigned mobile application.",
+      "max_abs_diff": 1.9371509552001953e-06,
+      "cosine": 0.9999999403953552
+    },
+    {
+      "sentence": "Quarterly cash flow exceeded the forecast by five percent.",
+      "max_abs_diff": 1.6689300537109375e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The clinical study enrolled participants across four hospitals.",
+      "max_abs_diff": 2.4586915969848633e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The security review identified two configuration issues.",
+      "max_abs_diff": 1.6391277313232422e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The supplier will deliver replacement components next month.",
+      "max_abs_diff": 1.5497207641601562e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The proposal compares implementation cost and expected benefit.",
+      "max_abs_diff": 2.4065375328063965e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The software release includes accessibility improvements.",
+      "max_abs_diff": 1.7881393432617188e-06,
+      "cosine": 0.9999999403953552
+    },
+    {
+      "sentence": "The committee postponed its decision until additional data arrives.",
+      "max_abs_diff": 2.086162567138672e-06,
+      "cosine": 0.9999999403953552
+    },
+    {
+      "sentence": "The warehouse recorded fewer damaged packages this week.",
+      "max_abs_diff": 1.6689300537109375e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The contract renews automatically unless either party gives notice.",
+      "max_abs_diff": 1.8477439880371094e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The sales team expanded coverage in the northern region.",
+      "max_abs_diff": 1.9073486328125e-06,
+      "cosine": 1.0
+    },
+    {
+      "sentence": "The report summarizes risks, milestones, and open questions.",
+      "max_abs_diff": 1.9073486328125e-06,
+      "cosine": 1.0
+    }
+  ],
+  "zero_weight_max_abs_diff": 2.4586915969848633e-06,
+  "zero_weight_mean_cosine": 0.9999999821186065,
+  "attention_shift": {
+    "metric": "average fraction of attention probability on same-section tokens, averaged over valid section queries, heads, and layers",
+    "nonzero_weights": {
+      "depth": 0.0,
+      "parent": -1.0,
+      "sibling": 0.0
+    },
+    "pass_threshold": {
+      "minimum_gain": 0.1,
+      "windows_meeting_gain": 4,
+      "embedding_cosine": 0.9
+    },
+    "windows": [
+      {
+        "window": 1,
+        "tokens": 29,
+        "within_section_before": 0.24493526419003805,
+        "within_section_after": 0.3699667577942212,
+        "gain": 0.12503149360418317,
+        "cls_embedding_cosine": 0.9816586971282959
+      },
+      {
+        "window": 2,
+        "tokens": 29,
+        "within_section_before": 0.2527963009973367,
+        "within_section_after": 0.3821953162550926,
+        "gain": 0.12939901525775593,
+        "cls_embedding_cosine": 0.9813598990440369
+      },
+      {
+        "window": 3,
+        "tokens": 30,
+        "within_section_before": 0.2571147568523884,
+        "within_section_after": 0.38978199909130734,
+        "gain": 0.13266724223891896,
+        "cls_embedding_cosine": 0.9808736443519592
+      },
+      {
+        "window": 4,
+        "tokens": 32,
+        "within_section_before": 0.25425366684794426,
+        "within_section_after": 0.38499752680460614,
+        "gain": 0.13074385995666188,
+        "cls_embedding_cosine": 0.9836452007293701
+      },
+      {
+        "window": 5,
+        "tokens": 27,
+        "within_section_before": 0.23602347200115523,
+        "within_section_after": 0.3565273197988669,
+        "gain": 0.1205038477977117,
+        "cls_embedding_cosine": 0.9863148331642151
+      }
+    ],
+    "windows_meeting_gain": 5,
+    "windows_meeting_both": 5
+  },
+  "overhead": [
+    {
+      "batch_size": 1,
+      "sequence_length": 512,
+      "stock": {
+        "median_ms": 12.187,
+        "peak_allocated_mb": 445.87,
+        "peak_reserved_mb": 498.0
+      },
+      "hooked_zero_sgam": {
+        "median_ms": 15.621,
+        "peak_allocated_mb": 474.42,
+        "peak_reserved_mb": 1374.0
+      },
+      "latency_overhead_percent": 28.18,
+      "peak_memory_delta_mb": 28.55
+    },
+    {
+      "batch_size": 8,
+      "sequence_length": 512,
+      "stock": {
+        "median_ms": 81.413,
+        "peak_allocated_mb": 559.92,
+        "peak_reserved_mb": 690.0
+      },
+      "hooked_zero_sgam": {
+        "median_ms": 121.686,
+        "peak_allocated_mb": 719.53,
+        "peak_reserved_mb": 1374.0
+      },
+      "latency_overhead_percent": 49.47,
+      "peak_memory_delta_mb": 159.61
+    },
+    {
+      "batch_size": 32,
+      "sequence_length": 512,
+      "stock": {
+        "median_ms": 331.257,
+        "peak_allocated_mb": 956.11,
+        "peak_reserved_mb": 1362.0
+      },
+      "hooked_zero_sgam": {
+        "median_ms": 525.749,
+        "peak_allocated_mb": 1571.92,
+        "peak_reserved_mb": 2142.0
+      },
+      "latency_overhead_percent": 58.71,
+      "peak_memory_delta_mb": 615.81
+    }
+  ],
+  "gradient_checks": [
+    {
+      "mode": "shared",
+      "unique_parameter_count": 3,
+      "expected_parameter_count": 3,
+      "nonzero_gradient_count": 3,
+      "checked_gradient_count": 3,
+      "parameters": [
+        {
+          "layer": "shared",
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.00012962103937752545,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": "shared",
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0017393305897712708,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": "shared",
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0005448145675472915,
+          "nonzero_gradient": true
+        }
+      ],
+      "loss": 0.3264945149421692
+    },
+    {
+      "mode": "per_layer",
+      "unique_parameter_count": 36,
+      "expected_parameter_count": 36,
+      "nonzero_gradient_count": 36,
+      "checked_gradient_count": 36,
+      "parameters": [
+        {
+          "layer": 0,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": -8.881637768354267e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 0,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.0010769041255116463,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 0,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.000211784485145472,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 1,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": 3.4842785680666566e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 1,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.00013170152669772506,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 1,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": -9.608245454728603e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 2,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": 1.723805326037109e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 2,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.00010249998013023287,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 2,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": -7.063722296152264e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 3,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0001336989225819707,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 3,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0012045769253745675,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 3,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": 7.605909195262939e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 4,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": 5.099728878121823e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 4,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.000478441797895357,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 4,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.00017368693079333752,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 5,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": 5.5370059271808714e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 5,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0003144994843751192,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 5,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.00020280150056350976,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 6,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": -1.4657688552688342e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 6,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": 4.5852764742448926e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 6,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0003443708410486579,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 7,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0001737028214847669,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 7,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0020609137136489153,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 7,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0005898625240661204,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 8,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.00019829728989861906,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 8,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.000605245993938297,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 8,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.0004060767241753638,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 9,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.00012178206816315651,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 9,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.0020711058750748634,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 9,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": 0.00033226259984076023,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 10,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.0001512352901045233,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 10,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.00030695096938870847,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 10,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": -1.5145065844990313e-05,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 11,
+          "parameter": "depth_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.00026424642419442534,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 11,
+          "parameter": "parent_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.002476160414516926,
+          "nonzero_gradient": true
+        },
+        {
+          "layer": 11,
+          "parameter": "sibling_weight",
+          "value": -0.20000000298023224,
+          "gradient": -0.0003745029680430889,
+          "nonzero_gradient": true
+        }
+      ],
+      "loss": 0.3264945149421692
+    }
+  ],
+  "gate_summary": {
+    "hook_reached_all_layers": true,
+    "zero_weight_equivalence_pass": true,
+    "attention_shift_pass": true,
+    "gradient_parameter_counts_pass": true,
+    "gradient_nonzero_pass": true
+  }
+}

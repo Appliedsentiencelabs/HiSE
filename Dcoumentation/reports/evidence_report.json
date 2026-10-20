@@ -1,0 +1,1473 @@
+{
+  "report_title": "Component validation",
+  "created_at_utc": "2026-10-20T20:44:58.477755+00:00",
+  "thresholds_fixed_before_run": {
+    "zero_weight_max_abs_diff": 1e-05,
+    "zero_weight_cls_cosine": 0.99999,
+    "zero_weight_mean_pool_cosine": 0.99999,
+    "attention_shift_gain": 0.1,
+    "attention_shift_windows": 4,
+    "attention_shift_cls_cosine": 0.9,
+    "shuffled_true_section_max_gain": 0.02,
+    "parent_weight_grid": [
+      -0.5,
+      -1.0,
+      -2.0
+    ],
+    "timing_warmups": 5,
+    "timing_repeats": 20,
+    "timing_sequence_length": 512
+  },
+  "environment": {
+    "python_executable": "C:\\Users\\Admin\\RESEARCH\\HiSE\\hise\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 13:17:27) [MSC v.1929 64 bit (AMD64)]",
+    "numpy": "1.26.4",
+    "pandas": "2.2.2",
+    "torch": "2.7.1+cu118",
+    "transformers": "4.51.3",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "seed": 20261021,
+    "git_commit": "51d77da28a3b9b7c7a7c8e559224ae21471d791d",
+    "model_snapshot_path": "C:\\Users\\Admin\\.cache\\huggingface\\hub\\models--BAAI--bge-base-en-v1.5\\snapshots\\a5beb1e3e68b9ab74eb54cfd186867f64f240e1a"
+  },
+  "unit_tests": {
+    "exit_code": 0,
+    "passed": 29,
+    "failed": 0,
+    "skipped": 0,
+    "per_file": {
+      "unknown": {
+        "passed": 29,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    "output_tail": [
+      ".............................                                            [100%]",
+      "- generated xml file: C:\\Users\\Admin\\AppData\\Local\\Temp\\hise-component-tests-ndki3kkt\\pytest.xml -",
+      ""
+    ]
+  },
+  "notebooks": {
+    "passed": 4,
+    "failed": 0,
+    "notebooks": [
+      {
+        "notebook": "02_parsers.ipynb",
+        "passed": true,
+        "kernel_executable": "C:\\Users\\Admin\\RESEARCH\\HiSE\\hise\\.venv\\Scripts\\python.exe"
+      },
+      {
+        "notebook": "03_sgam_injection.ipynb",
+        "passed": true,
+        "kernel_executable": "C:\\Users\\Admin\\RESEARCH\\HiSE\\hise\\.venv\\Scripts\\python.exe"
+      },
+      {
+        "notebook": "04_data_pipeline.ipynb",
+        "passed": true,
+        "kernel_executable": "C:\\Users\\Admin\\RESEARCH\\HiSE\\hise\\.venv\\Scripts\\python.exe"
+      },
+      {
+        "notebook": "HiSA_PreAttention_Implementation.ipynb",
+        "passed": true,
+        "kernel_executable": "C:\\Users\\Admin\\RESEARCH\\HiSE\\hise\\.venv\\Scripts\\python.exe"
+      }
+    ]
+  },
+  "model": {
+    "id": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "class": "BertModel",
+    "layers": 12
+  },
+  "hook": {
+    "default_class": "BertSdpaSelfAttention",
+    "default_implementation": "sdpa",
+    "class_before_attach": "BertSelfAttention",
+    "class_after_attach": "BertSelfAttention",
+    "implementation_after_attach": "eager",
+    "calls_first_forward": 12,
+    "fresh_reload_class_before_attach": "BertSdpaSelfAttention",
+    "calls_after_fresh_reload": 12,
+    "expected_calls": 12,
+    "training_dropout": {
+      "attention_dropout_calls": 12,
+      "expected_calls": 12,
+      "stock_different_seed_max_output_diff": 1.8205463886260986,
+      "stock_vs_zero_hook_same_seed_max_abs_diff": 0.0
+    }
+  },
+  "equivalence": {
+    "sentence_count": 20,
+    "batch_shape": [
+      20,
+      16
+    ],
+    "padding_used": true,
+    "per_sentence": [
+      {
+        "index": 1,
+        "sentence": "The company reported higher revenue during the first quarter.",
+        "nonpad_tokens": 12,
+        "hidden_max_abs_diff_nonpad": 1.385807991027832e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 0.9999999403953552
+      },
+      {
+        "index": 2,
+        "sentence": "Operating margin improved as manufacturing costs declined.",
+        "nonpad_tokens": 10,
+        "hidden_max_abs_diff_nonpad": 1.5497207641601562e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 3,
+        "sentence": "The board approved the annual budget at its meeting.",
+        "nonpad_tokens": 12,
+        "hidden_max_abs_diff_nonpad": 1.8775463104248047e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 4,
+        "sentence": "Customer retention increased after the support program launched.",
+        "nonpad_tokens": 11,
+        "hidden_max_abs_diff_nonpad": 1.7881393432617188e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 5,
+        "sentence": "The research team evaluated three retrieval architectures.",
+        "nonpad_tokens": 11,
+        "hidden_max_abs_diff_nonpad": 1.9073486328125e-06,
+        "cls_cosine": 0.9999999403953552,
+        "mean_pool_cosine": 1.0000001192092896
+      },
+      {
+        "index": 6,
+        "sentence": "A new distribution center opened near the regional market.",
+        "nonpad_tokens": 12,
+        "hidden_max_abs_diff_nonpad": 2.0638108253479004e-06,
+        "cls_cosine": 0.9999998807907104,
+        "mean_pool_cosine": 1.0000001192092896
+      },
+      {
+        "index": 7,
+        "sentence": "The policy requires approval from the department manager.",
+        "nonpad_tokens": 11,
+        "hidden_max_abs_diff_nonpad": 1.4901161193847656e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 0.9999999403953552
+      },
+      {
+        "index": 8,
+        "sentence": "Energy consumption fell after the equipment upgrade.",
+        "nonpad_tokens": 10,
+        "hidden_max_abs_diff_nonpad": 1.1920928955078125e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 9,
+        "sentence": "The product roadmap includes a redesigned mobile application.",
+        "nonpad_tokens": 13,
+        "hidden_max_abs_diff_nonpad": 1.9371509552001953e-06,
+        "cls_cosine": 0.9999999403953552,
+        "mean_pool_cosine": 0.9999999403953552
+      },
+      {
+        "index": 10,
+        "sentence": "Quarterly cash flow exceeded the forecast by five percent.",
+        "nonpad_tokens": 12,
+        "hidden_max_abs_diff_nonpad": 1.6689300537109375e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 11,
+        "sentence": "The clinical study enrolled participants across four hospitals.",
+        "nonpad_tokens": 11,
+        "hidden_max_abs_diff_nonpad": 2.4586915969848633e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 12,
+        "sentence": "The security review identified two configuration issues.",
+        "nonpad_tokens": 10,
+        "hidden_max_abs_diff_nonpad": 1.6391277313232422e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 13,
+        "sentence": "The supplier will deliver replacement components next month.",
+        "nonpad_tokens": 11,
+        "hidden_max_abs_diff_nonpad": 1.5497207641601562e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 0.9999999403953552
+      },
+      {
+        "index": 14,
+        "sentence": "The proposal compares implementation cost and expected benefit.",
+        "nonpad_tokens": 11,
+        "hidden_max_abs_diff_nonpad": 2.4065375328063965e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 15,
+        "sentence": "The software release includes accessibility improvements.",
+        "nonpad_tokens": 9,
+        "hidden_max_abs_diff_nonpad": 1.7881393432617188e-06,
+        "cls_cosine": 0.9999999403953552,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 16,
+        "sentence": "The committee postponed its decision until additional data arrives.",
+        "nonpad_tokens": 12,
+        "hidden_max_abs_diff_nonpad": 2.086162567138672e-06,
+        "cls_cosine": 0.9999999403953552,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 17,
+        "sentence": "The warehouse recorded fewer damaged packages this week.",
+        "nonpad_tokens": 11,
+        "hidden_max_abs_diff_nonpad": 1.6689300537109375e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 18,
+        "sentence": "The contract renews automatically unless either party gives notice.",
+        "nonpad_tokens": 13,
+        "hidden_max_abs_diff_nonpad": 1.8477439880371094e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      },
+      {
+        "index": 19,
+        "sentence": "The sales team expanded coverage in the northern region.",
+        "nonpad_tokens": 12,
+        "hidden_max_abs_diff_nonpad": 1.9073486328125e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0000001192092896
+      },
+      {
+        "index": 20,
+        "sentence": "The report summarizes risks, milestones, and open questions.",
+        "nonpad_tokens": 16,
+        "hidden_max_abs_diff_nonpad": 1.9073486328125e-06,
+        "cls_cosine": 1.0,
+        "mean_pool_cosine": 1.0
+      }
+    ],
+    "hidden_diff": {
+      "min": 1.1920928955078125e-06,
+      "mean": 1.806020736694336e-06,
+      "max": 2.4586915969848633e-06
+    },
+    "cls_cosine": {
+      "min": 0.9999998807907104,
+      "mean": 0.9999999821186065,
+      "max": 1.0
+    },
+    "mean_pool_cosine": {
+      "min": 0.9999999403953552,
+      "mean": 1.0000000059604646,
+      "max": 1.0000001192092896
+    }
+  },
+  "attention_shift": {
+    "metric": "for each valid text token, sum attention probabilities to valid tokens in its true section; average queries, heads, then layers",
+    "address_source": "fast tokenizer offset_mapping intersected with each handwritten section character span",
+    "offset_mapping": [
+      {
+        "window": 1,
+        "token_count_including_specials": 29,
+        "section_token_counts": [
+          10,
+          8,
+          9
+        ],
+        "section_char_spans": [
+          {
+            "start": 0,
+            "end": 58,
+            "section": 1
+          },
+          {
+            "start": 60,
+            "end": 120,
+            "section": 2
+          },
+          {
+            "start": 122,
+            "end": 174,
+            "section": 3
+          }
+        ],
+        "special_and_padding_tokens_excluded": 5
+      },
+      {
+        "window": 2,
+        "token_count_including_specials": 29,
+        "section_token_counts": [
+          10,
+          8,
+          9
+        ],
+        "section_char_spans": [
+          {
+            "start": 0,
+            "end": 60,
+            "section": 1
+          },
+          {
+            "start": 62,
+            "end": 121,
+            "section": 2
+          },
+          {
+            "start": 123,
+            "end": 178,
+            "section": 3
+          }
+        ],
+        "special_and_padding_tokens_excluded": 5
+      },
+      {
+        "window": 3,
+        "token_count_including_specials": 30,
+        "section_token_counts": [
+          8,
+          10,
+          10
+        ],
+        "section_char_spans": [
+          {
+            "start": 0,
+            "end": 60,
+            "section": 1
+          },
+          {
+            "start": 62,
+            "end": 119,
+            "section": 2
+          },
+          {
+            "start": 121,
+            "end": 178,
+            "section": 3
+          }
+        ],
+        "special_and_padding_tokens_excluded": 4
+      },
+      {
+        "window": 4,
+        "token_count_including_specials": 32,
+        "section_token_counts": [
+          10,
+          9,
+          11
+        ],
+        "section_char_spans": [
+          {
+            "start": 0,
+            "end": 56,
+            "section": 1
+          },
+          {
+            "start": 58,
+            "end": 108,
+            "section": 2
+          },
+          {
+            "start": 110,
+            "end": 167,
+            "section": 3
+          }
+        ],
+        "special_and_padding_tokens_excluded": 2
+      },
+      {
+        "window": 5,
+        "token_count_including_specials": 27,
+        "section_token_counts": [
+          8,
+          8,
+          9
+        ],
+        "section_char_spans": [
+          {
+            "start": 0,
+            "end": 52,
+            "section": 1
+          },
+          {
+            "start": 54,
+            "end": 107,
+            "section": 2
+          },
+          {
+            "start": 109,
+            "end": 165,
+            "section": 3
+          }
+        ],
+        "special_and_padding_tokens_excluded": 7
+      }
+    ],
+    "grid": [
+      {
+        "parent_weight": -0.5,
+        "windows": [
+          {
+            "window": 1,
+            "token_count": 29,
+            "zero_mass": 0.24493526419003805,
+            "biased_mass": 0.30484284088015556,
+            "gain": 0.05990757669011751,
+            "cls_cosine": 0.9957870244979858,
+            "per_layer": [
+              0.4131152927875519,
+              0.30931782722473145,
+              0.40223821997642517,
+              0.3488374948501587,
+              0.2273125797510147,
+              0.22705362737178802,
+              0.2220776379108429,
+              0.2700605094432831,
+              0.2441268116235733,
+              0.28561311960220337,
+              0.35308852791786194,
+              0.35527244210243225
+            ],
+            "zero_bias_per_layer": [
+              0.3209322392940521,
+              0.2445453405380249,
+              0.3542894721031189,
+              0.28636059165000916,
+              0.18657314777374268,
+              0.19203829765319824,
+              0.18860265612602234,
+              0.22875238955020905,
+              0.18915869295597076,
+              0.218164324760437,
+              0.26291990280151367,
+              0.2668861150741577
+            ]
+          },
+          {
+            "window": 2,
+            "token_count": 29,
+            "zero_mass": 0.2527963009973367,
+            "biased_mass": 0.31457701573769253,
+            "gain": 0.06178071474035585,
+            "cls_cosine": 0.9955539703369141,
+            "per_layer": [
+              0.4139941334724426,
+              0.3071931004524231,
+              0.4148326516151428,
+              0.3622072637081146,
+              0.24589098989963531,
+              0.2394695281982422,
+              0.23418889939785004,
+              0.3039819598197937,
+              0.250166118144989,
+              0.27267470955848694,
+              0.3591326177120209,
+              0.37119221687316895
+            ],
+            "zero_bias_per_layer": [
+              0.32130953669548035,
+              0.2434735745191574,
+              0.36118242144584656,
+              0.2971358001232147,
+              0.20118369162082672,
+              0.2023070603609085,
+              0.19891414046287537,
+              0.2625595033168793,
+              0.19369903206825256,
+              0.20381319522857666,
+              0.2687593102455139,
+              0.2792183458805084
+            ]
+          },
+          {
+            "window": 3,
+            "token_count": 30,
+            "zero_mass": 0.2571147568523884,
+            "biased_mass": 0.31991024936238927,
+            "gain": 0.06279549251000088,
+            "cls_cosine": 0.9963294267654419,
+            "per_layer": [
+              0.4243175983428955,
+              0.3263338804244995,
+              0.39586904644966125,
+              0.36800235509872437,
+              0.27133461833000183,
+              0.24265874922275543,
+              0.26720622181892395,
+              0.31954705715179443,
+              0.26424941420555115,
+              0.30007076263427734,
+              0.32504910230636597,
+              0.3342841863632202
+            ],
+            "zero_bias_per_layer": [
+              0.33227503299713135,
+              0.26067158579826355,
+              0.3449808955192566,
+              0.3033292591571808,
+              0.2222440391778946,
+              0.2040604203939438,
+              0.22941042482852936,
+              0.2729669213294983,
+              0.20683583617210388,
+              0.22538605332374573,
+              0.23647540807724,
+              0.24674120545387268
+            ]
+          },
+          {
+            "window": 4,
+            "token_count": 32,
+            "zero_mass": 0.25425366684794426,
+            "biased_mass": 0.31577949970960617,
+            "gain": 0.06152583286166191,
+            "cls_cosine": 0.9963070154190063,
+            "per_layer": [
+              0.4275631606578827,
+              0.34112444519996643,
+              0.4006832540035248,
+              0.3755737543106079,
+              0.25306352972984314,
+              0.24917665123939514,
+              0.2573642432689667,
+              0.30223825573921204,
+              0.23356887698173523,
+              0.26830223202705383,
+              0.32800018787384033,
+              0.35269540548324585
+            ],
+            "zero_bias_per_layer": [
+              0.33617499470710754,
+              0.2722338140010834,
+              0.34827885031700134,
+              0.3082295358181,
+              0.2089587301015854,
+              0.21091815829277039,
+              0.2202710062265396,
+              0.25882628560066223,
+              0.17881588637828827,
+              0.20231309533119202,
+              0.24217182397842407,
+              0.2638518214225769
+            ]
+          },
+          {
+            "window": 5,
+            "token_count": 27,
+            "zero_mass": 0.23602347200115523,
+            "biased_mass": 0.2933303986986478,
+            "gain": 0.05730692669749257,
+            "cls_cosine": 0.9966936707496643,
+            "per_layer": [
+              0.40207865834236145,
+              0.2584741413593292,
+              0.38727864623069763,
+              0.3405957520008087,
+              0.19975435733795166,
+              0.22359642386436462,
+              0.2372429221868515,
+              0.2826070189476013,
+              0.24501439929008484,
+              0.24924691021442413,
+              0.33288052678108215,
+              0.36119502782821655
+            ],
+            "zero_bias_per_layer": [
+              0.3102617561817169,
+              0.2018216848373413,
+              0.3361688256263733,
+              0.2781800329685211,
+              0.16440753638744354,
+              0.18679456412792206,
+              0.20284555852413177,
+              0.24922959506511688,
+              0.19550321996212006,
+              0.18790115416049957,
+              0.24865026772022247,
+              0.2705174684524536
+            ]
+          }
+        ],
+        "windows_meeting_gate": 0,
+        "mean_gain": 0.06066330869992574
+      },
+      {
+        "parent_weight": -1.0,
+        "windows": [
+          {
+            "window": 1,
+            "token_count": 29,
+            "zero_mass": 0.24493526419003805,
+            "biased_mass": 0.3699667577942212,
+            "gain": 0.12503149360418317,
+            "cls_cosine": 0.9816586971282959,
+            "per_layer": [
+              0.5117586255073547,
+              0.3824472725391388,
+              0.45280665159225464,
+              0.4179050326347351,
+              0.272055447101593,
+              0.2641085982322693,
+              0.2594580352306366,
+              0.3133738934993744,
+              0.30672213435173035,
+              0.358688086271286,
+              0.45338279008865356,
+              0.4468945264816284
+            ],
+            "zero_bias_per_layer": [
+              0.3209322392940521,
+              0.2445453405380249,
+              0.3542894721031189,
+              0.28636059165000916,
+              0.18657314777374268,
+              0.19203829765319824,
+              0.18860265612602234,
+              0.22875238955020905,
+              0.18915869295597076,
+              0.218164324760437,
+              0.26291990280151367,
+              0.2668861150741577
+            ]
+          },
+          {
+            "window": 2,
+            "token_count": 29,
+            "zero_mass": 0.2527963009973367,
+            "biased_mass": 0.3821953162550926,
+            "gain": 0.12939901525775593,
+            "cls_cosine": 0.9813598990440369,
+            "per_layer": [
+              0.5131562948226929,
+              0.37836167216300964,
+              0.47198501229286194,
+              0.4338204264640808,
+              0.29376259446144104,
+              0.278445303440094,
+              0.27302277088165283,
+              0.3412184417247772,
+              0.3167758285999298,
+              0.3513385057449341,
+              0.46112874150276184,
+              0.47332820296287537
+            ],
+            "zero_bias_per_layer": [
+              0.32130953669548035,
+              0.2434735745191574,
+              0.36118242144584656,
+              0.2971358001232147,
+              0.20118369162082672,
+              0.2023070603609085,
+              0.19891414046287537,
+              0.2625595033168793,
+              0.19369903206825256,
+              0.20381319522857666,
+              0.2687593102455139,
+              0.2792183458805084
+            ]
+          },
+          {
+            "window": 3,
+            "token_count": 30,
+            "zero_mass": 0.2571147568523884,
+            "biased_mass": 0.38978199909130734,
+            "gain": 0.13266724223891896,
+            "cls_cosine": 0.9808736443519592,
+            "per_layer": [
+              0.5223643779754639,
+              0.3998010754585266,
+              0.45241284370422363,
+              0.44074559211730957,
+              0.32504379749298096,
+              0.2848694622516632,
+              0.30644622445106506,
+              0.364543616771698,
+              0.33007314801216125,
+              0.3884083926677704,
+              0.42962464690208435,
+              0.43305081129074097
+            ],
+            "zero_bias_per_layer": [
+              0.33227503299713135,
+              0.26067158579826355,
+              0.3449808955192566,
+              0.3033292591571808,
+              0.2222440391778946,
+              0.2040604203939438,
+              0.22941042482852936,
+              0.2729669213294983,
+              0.20683583617210388,
+              0.22538605332374573,
+              0.23647540807724,
+              0.24674120545387268
+            ]
+          },
+          {
+            "window": 4,
+            "token_count": 32,
+            "zero_mass": 0.25425366684794426,
+            "biased_mass": 0.38499752680460614,
+            "gain": 0.13074385995666188,
+            "cls_cosine": 0.9836452007293701,
+            "per_layer": [
+              0.5251001119613647,
+              0.4186317026615143,
+              0.45771434903144836,
+              0.45071327686309814,
+              0.30237284302711487,
+              0.2905966341495514,
+              0.2978777289390564,
+              0.3462461233139038,
+              0.3004099726676941,
+              0.34714388847351074,
+              0.4310736358165741,
+              0.4520900547504425
+            ],
+            "zero_bias_per_layer": [
+              0.33617499470710754,
+              0.2722338140010834,
+              0.34827885031700134,
+              0.3082295358181,
+              0.2089587301015854,
+              0.21091815829277039,
+              0.2202710062265396,
+              0.25882628560066223,
+              0.17881588637828827,
+              0.20231309533119202,
+              0.24217182397842407,
+              0.2638518214225769
+            ]
+          },
+          {
+            "window": 5,
+            "token_count": 27,
+            "zero_mass": 0.23602347200115523,
+            "biased_mass": 0.3565273197988669,
+            "gain": 0.1205038477977117,
+            "cls_cosine": 0.9863148331642151,
+            "per_layer": [
+              0.5007127523422241,
+              0.3233044147491455,
+              0.442190557718277,
+              0.41006433963775635,
+              0.23917214572429657,
+              0.26422032713890076,
+              0.27590832114219666,
+              0.3157148063182831,
+              0.29926276206970215,
+              0.3203265070915222,
+              0.42924028635025024,
+              0.45821061730384827
+            ],
+            "zero_bias_per_layer": [
+              0.3102617561817169,
+              0.2018216848373413,
+              0.3361688256263733,
+              0.2781800329685211,
+              0.16440753638744354,
+              0.18679456412792206,
+              0.20284555852413177,
+              0.24922959506511688,
+              0.19550321996212006,
+              0.18790115416049957,
+              0.24865026772022247,
+              0.2705174684524536
+            ]
+          }
+        ],
+        "windows_meeting_gate": 5,
+        "mean_gain": 0.12766909177104632
+      },
+      {
+        "parent_weight": -2.0,
+        "windows": [
+          {
+            "window": 1,
+            "token_count": 29,
+            "zero_mass": 0.24493526419003805,
+            "biased_mass": 0.5011108666658401,
+            "gain": 0.25617560247580207,
+            "cls_cosine": 0.9121079444885254,
+            "per_layer": [
+              0.6996380686759949,
+              0.544909656047821,
+              0.562178909778595,
+              0.5665999054908752,
+              0.373483270406723,
+              0.34353968501091003,
+              0.34224051237106323,
+              0.3956286609172821,
+              0.43257102370262146,
+              0.49001699686050415,
+              0.6446609497070312,
+              0.6178627610206604
+            ],
+            "zero_bias_per_layer": [
+              0.3209322392940521,
+              0.2445453405380249,
+              0.3542894721031189,
+              0.28636059165000916,
+              0.18657314777374268,
+              0.19203829765319824,
+              0.18860265612602234,
+              0.22875238955020905,
+              0.18915869295597076,
+              0.218164324760437,
+              0.26291990280151367,
+              0.2668861150741577
+            ]
+          },
+          {
+            "window": 2,
+            "token_count": 29,
+            "zero_mass": 0.2527963009973367,
+            "biased_mass": 0.5178485115369161,
+            "gain": 0.26505221053957945,
+            "cls_cosine": 0.9092228412628174,
+            "per_layer": [
+              0.7010449767112732,
+              0.535696804523468,
+              0.5934862494468689,
+              0.5902913808822632,
+              0.4022291600704193,
+              0.3579340875148773,
+              0.34998923540115356,
+              0.4041406512260437,
+              0.4496065676212311,
+              0.49744805693626404,
+              0.6618590950965881,
+              0.6704558730125427
+            ],
+            "zero_bias_per_layer": [
+              0.32130953669548035,
+              0.2434735745191574,
+              0.36118242144584656,
+              0.2971358001232147,
+              0.20118369162082672,
+              0.2023070603609085,
+              0.19891414046287537,
+              0.2625595033168793,
+              0.19369903206825256,
+              0.20381319522857666,
+              0.2687593102455139,
+              0.2792183458805084
+            ]
+          },
+          {
+            "window": 3,
+            "token_count": 30,
+            "zero_mass": 0.2571147568523884,
+            "biased_mass": 0.5349318757653236,
+            "gain": 0.27781711891293526,
+            "cls_cosine": 0.893887996673584,
+            "per_layer": [
+              0.7073851823806763,
+              0.5618618726730347,
+              0.5775154829025269,
+              0.599942147731781,
+              0.44513893127441406,
+              0.37609222531318665,
+              0.38750705122947693,
+              0.44508734345436096,
+              0.4655081033706665,
+              0.5718837380409241,
+              0.647613525390625,
+              0.6336469054222107
+            ],
+            "zero_bias_per_layer": [
+              0.33227503299713135,
+              0.26067158579826355,
+              0.3449808955192566,
+              0.3033292591571808,
+              0.2222440391778946,
+              0.2040604203939438,
+              0.22941042482852936,
+              0.2729669213294983,
+              0.20683583617210388,
+              0.22538605332374573,
+              0.23647540807724,
+              0.24674120545387268
+            ]
+          },
+          {
+            "window": 4,
+            "token_count": 32,
+            "zero_mass": 0.25425366684794426,
+            "biased_mass": 0.5283160458008448,
+            "gain": 0.27406237895290053,
+            "cls_cosine": 0.918969452381134,
+            "per_layer": [
+              0.7098165154457092,
+              0.5872846841812134,
+              0.5825411677360535,
+              0.6122645139694214,
+              0.4173826575279236,
+              0.37734514474868774,
+              0.37956222891807556,
+              0.4279617369174957,
+              0.44565194845199585,
+              0.5075710415840149,
+              0.6505110859870911,
+              0.641899824142456
+            ],
+            "zero_bias_per_layer": [
+              0.33617499470710754,
+              0.2722338140010834,
+              0.34827885031700134,
+              0.3082295358181,
+              0.2089587301015854,
+              0.21091815829277039,
+              0.2202710062265396,
+              0.25882628560066223,
+              0.17881588637828827,
+              0.20231309533119202,
+              0.24217182397842407,
+              0.2638518214225769
+            ]
+          },
+          {
+            "window": 5,
+            "token_count": 27,
+            "zero_mass": 0.23602347200115523,
+            "biased_mass": 0.488466314971447,
+            "gain": 0.25244284297029174,
+            "cls_cosine": 0.94650799036026,
+            "per_layer": [
+              0.6889477968215942,
+              0.47358888387680054,
+              0.5567259192466736,
+              0.5612384676933289,
+              0.33164307475090027,
+              0.3539915978908539,
+              0.35939377546310425,
+              0.3829832673072815,
+              0.4100998342037201,
+              0.4728209972381592,
+              0.6359260082244873,
+              0.6342361569404602
+            ],
+            "zero_bias_per_layer": [
+              0.3102617561817169,
+              0.2018216848373413,
+              0.3361688256263733,
+              0.2781800329685211,
+              0.16440753638744354,
+              0.18679456412792206,
+              0.20284555852413177,
+              0.24922959506511688,
+              0.19550321996212006,
+              0.18790115416049957,
+              0.24865026772022247,
+              0.2705174684524536
+            ]
+          }
+        ],
+        "windows_meeting_gate": 4,
+        "mean_gain": 0.2651100307703018
+      }
+    ],
+    "zero_control_max_difference": 0.0,
+    "shuffled_control": {
+      "seed": 20261021,
+      "parent_weight": -1.0,
+      "gains": [
+        0.034103567401568086,
+        0.035147978613774,
+        0.032320693135261536,
+        0.04070675621430081,
+        0.0377104543149471
+      ],
+      "max_gain": 0.04070675621430081,
+      "passed": false
+    }
+  },
+  "gradients": [
+    {
+      "mode": "shared",
+      "unique_parameters": 3,
+      "expected_parameters": 3,
+      "nonzero_gradient_count": 3,
+      "checked_gradient_count": 3,
+      "encoder_frozen": false,
+      "optimizer": "SGD(lr=0.01)",
+      "step_executed": true,
+      "loss": 0.3349338471889496,
+      "parameters": [
+        {
+          "layer": "shared",
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.00029967055888846517,
+          "nonzero": true,
+          "after": -0.19999700784683228
+        },
+        {
+          "layer": "shared",
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.00012785103172063828,
+          "nonzero": true,
+          "after": -0.2000012844800949
+        },
+        {
+          "layer": "shared",
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.0010934299789369106,
+          "nonzero": true,
+          "after": -0.20001094043254852
+        }
+      ]
+    },
+    {
+      "mode": "per_layer",
+      "unique_parameters": 36,
+      "expected_parameters": 36,
+      "nonzero_gradient_count": 36,
+      "checked_gradient_count": 36,
+      "encoder_frozen": false,
+      "optimizer": "SGD(lr=0.01)",
+      "step_executed": true,
+      "loss": 0.3352651298046112,
+      "parameters": [
+        {
+          "layer": 0,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": -3.6570786505762953e-06,
+          "nonzero": true,
+          "after": -0.19999997317790985
+        },
+        {
+          "layer": 0,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.0002429122250759974,
+          "nonzero": true,
+          "after": -0.20000243186950684
+        },
+        {
+          "layer": 0,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": -2.2803840693086386e-05,
+          "nonzero": true,
+          "after": -0.19999977946281433
+        },
+        {
+          "layer": 1,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": 3.0623486964032054e-06,
+          "nonzero": true,
+          "after": -0.20000003278255463
+        },
+        {
+          "layer": 1,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.0001354599662590772,
+          "nonzero": true,
+          "after": -0.20000135898590088
+        },
+        {
+          "layer": 1,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.00018428557086735964,
+          "nonzero": true,
+          "after": -0.1999981552362442
+        },
+        {
+          "layer": 2,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": -1.560986493132077e-05,
+          "nonzero": true,
+          "after": -0.1999998539686203
+        },
+        {
+          "layer": 2,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.00035774538991972804,
+          "nonzero": true,
+          "after": -0.20000357925891876
+        },
+        {
+          "layer": 2,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": -6.804191070841625e-05,
+          "nonzero": true,
+          "after": -0.19999931752681732
+        },
+        {
+          "layer": 3,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": 5.702699127141386e-06,
+          "nonzero": true,
+          "after": -0.20000006258487701
+        },
+        {
+          "layer": 3,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": -8.92590032890439e-05,
+          "nonzero": true,
+          "after": -0.1999991089105606
+        },
+        {
+          "layer": 3,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": -4.6240456867963076e-05,
+          "nonzero": true,
+          "after": -0.19999954104423523
+        },
+        {
+          "layer": 4,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": -2.164611578336917e-05,
+          "nonzero": true,
+          "after": -0.19999977946281433
+        },
+        {
+          "layer": 4,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.0007394796703010798,
+          "nonzero": true,
+          "after": -0.1999926120042801
+        },
+        {
+          "layer": 4,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": 8.708291716175154e-06,
+          "nonzero": true,
+          "after": -0.2000000923871994
+        },
+        {
+          "layer": 5,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": 7.506813562940806e-05,
+          "nonzero": true,
+          "after": -0.20000074803829193
+        },
+        {
+          "layer": 5,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.0004020353080704808,
+          "nonzero": true,
+          "after": -0.20000402629375458
+        },
+        {
+          "layer": 5,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.00011433663166826591,
+          "nonzero": true,
+          "after": -0.20000115036964417
+        },
+        {
+          "layer": 6,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.00012549484381452203,
+          "nonzero": true,
+          "after": -0.19999875128269196
+        },
+        {
+          "layer": 6,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.0006964429630897939,
+          "nonzero": true,
+          "after": -0.1999930441379547
+        },
+        {
+          "layer": 6,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": 6.441326695494354e-05,
+          "nonzero": true,
+          "after": -0.20000064373016357
+        },
+        {
+          "layer": 7,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.00012101775064365938,
+          "nonzero": true,
+          "after": -0.20000120997428894
+        },
+        {
+          "layer": 7,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.001952987164258957,
+          "nonzero": true,
+          "after": -0.20001953840255737
+        },
+        {
+          "layer": 7,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.0006392221548594534,
+          "nonzero": true,
+          "after": -0.2000063955783844
+        },
+        {
+          "layer": 8,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.00011047854786738753,
+          "nonzero": true,
+          "after": -0.1999989002943039
+        },
+        {
+          "layer": 8,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.00028473115526139736,
+          "nonzero": true,
+          "after": -0.20000284910202026
+        },
+        {
+          "layer": 8,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.00022725661983713508,
+          "nonzero": true,
+          "after": -0.2000022828578949
+        },
+        {
+          "layer": 9,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": 7.922772056190297e-05,
+          "nonzero": true,
+          "after": -0.2000007927417755
+        },
+        {
+          "layer": 9,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.0026351800188422203,
+          "nonzero": true,
+          "after": -0.20002634823322296
+        },
+        {
+          "layer": 9,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": 0.00020796788157895207,
+          "nonzero": true,
+          "after": -0.20000208914279938
+        },
+        {
+          "layer": 10,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.00011882007675012574,
+          "nonzero": true,
+          "after": -0.19999881088733673
+        },
+        {
+          "layer": 10,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.0005458765081129968,
+          "nonzero": true,
+          "after": -0.1999945491552353
+        },
+        {
+          "layer": 10,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": -5.506325396709144e-05,
+          "nonzero": true,
+          "after": -0.19999945163726807
+        },
+        {
+          "layer": 11,
+          "name": "depth_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.00020155005040578544,
+          "nonzero": true,
+          "after": -0.19999799132347107
+        },
+        {
+          "layer": 11,
+          "name": "parent_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.0023716893047094345,
+          "nonzero": true,
+          "after": -0.19997628033161163
+        },
+        {
+          "layer": 11,
+          "name": "sibling_weight",
+          "before": -0.20000000298023224,
+          "gradient": -0.0002877289371099323,
+          "nonzero": true,
+          "after": -0.19999712705612183
+        }
+      ]
+    }
+  ],
+  "overhead": {
+    "stock_sdpa": [
+      {
+        "batch_size": 1,
+        "sequence_length": 512,
+        "measure": {
+          "warmups": 5,
+          "repeats": 20,
+          "median_ms": 11.2297,
+          "p95_ms": 12.2149,
+          "peak_allocated_mb": 652.2,
+          "peak_reserved_mb": 712.0
+        }
+      },
+      {
+        "batch_size": 8,
+        "sequence_length": 512,
+        "measure": {
+          "warmups": 5,
+          "repeats": 20,
+          "median_ms": 82.608,
+          "p95_ms": 83.4882,
+          "peak_allocated_mb": 766.25,
+          "peak_reserved_mb": 904.0
+        }
+      },
+      {
+        "batch_size": 32,
+        "sequence_length": 512,
+        "measure": {
+          "warmups": 5,
+          "repeats": 20,
+          "median_ms": 334.9388,
+          "p95_ms": 336.3477,
+          "peak_allocated_mb": 1162.44,
+          "peak_reserved_mb": 1576.0
+        }
+      }
+    ],
+    "stock_eager": [
+      {
+        "batch_size": 1,
+        "sequence_length": 512,
+        "measure": {
+          "warmups": 5,
+          "repeats": 20,
+          "median_ms": 12.1435,
+          "p95_ms": 12.4732,
+          "peak_allocated_mb": 672.2,
+          "peak_reserved_mb": 716.0
+        }
+      },
+      {
+        "batch_size": 8,
+        "sequence_length": 512,
+        "measure": {
+          "warmups": 5,
+          "repeats": 20,
+          "median_ms": 113.4804,
+          "p95_ms": 114.4738,
+          "peak_allocated_mb": 910.26,
+          "peak_reserved_mb": 968.0
+        }
+      },
+      {
+        "batch_size": 32,
+        "sequence_length": 512,
+        "measure": {
+          "warmups": 5,
+          "repeats": 20,
+          "median_ms": 469.3918,
+          "p95_ms": 486.3151,
+          "peak_allocated_mb": 1738.5,
+          "peak_reserved_mb": 1880.0
+        }
+      }
+    ],
+    "hooked": [
+      {
+        "batch_size": 1,
+        "sequence_length": 512,
+        "measure": {
+          "warmups": 5,
+          "repeats": 20,
+          "median_ms": 20.6437,
+          "p95_ms": 37.6019,
+          "peak_allocated_mb": 653.17,
+          "peak_reserved_mb": 722.0
+        }
+      },
+      {
+        "batch_size": 8,
+        "sequence_length": 512,
+        "measure": {
+          "warmups": 5,
+          "repeats": 20,
+          "median_ms": 140.0469,
+          "p95_ms": 154.6127,
+          "peak_allocated_mb": 898.24,
+          "peak_reserved_mb": 1058.0
+        }
+      },
+      {
+        "batch_size": 32,
+        "sequence_length": 512,
+        "measure": {
+          "warmups": 5,
+          "repeats": 20,
+          "median_ms": 595.2403,
+          "p95_ms": 617.4266,
+          "peak_allocated_mb": 1750.48,
+          "peak_reserved_mb": 2210.0
+        }
+      }
+    ]
+  },
+  "gates": {
+    "unit_tests": true,
+    "notebooks": true,
+    "hook_all_layers_first_and_reload": true,
+    "train_mode_dropout_preserved": true,
+    "zero_weight_equivalence": true,
+    "attention_shift": true,
+    "shuffled_control": false,
+    "zero_weight_control": true,
+    "shared_gradient_step": false,
+    "per_layer_gradient_step": false,
+    "three_arm_overhead_recorded": true
+  }
+}

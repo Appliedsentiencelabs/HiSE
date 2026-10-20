@@ -117,15 +117,41 @@ def build_token_level_addresses(
 def _bert_attention_mask_to_additive(mask: Tensor | None) -> Tensor | None:
     if mask is None:
         return None
+
+    input_is_binary = mask.dtype == torch.bool or not mask.is_floating_point()
     mask = mask.to(dtype=torch.float32)
+    is_binary = bool(torch.all((mask == 0) | (mask == 1)))
     if mask.dim() == 2:
-        mask = mask.unsqueeze(1).unsqueeze(2)
+        mask = mask[:, None, None, :]
     elif mask.dim() == 3:
-        mask = mask.unsqueeze(1)
-    if mask.shape[-1] != mask.shape[-2]:
-        mask = mask.transpose(-1, -2)
-    additive = (1.0 - mask) * -1e9
-    return additive
+        mask = mask[:, None, :, :]
+    elif mask.dim() == 4 and not input_is_binary and (not is_binary or bool(torch.all(mask == 0))):
+        return mask
+
+    if not is_binary:
+        raise ValueError("non-binary attention masks must be 4D additive masks")
+    return (1.0 - mask) * -1e9
+
+
+def _bert_attention_mask_to_valid(mask: Tensor | None, *, batch_size: int, key_length: int, device: torch.device) -> Tensor:
+    if mask is None:
+        return torch.ones((batch_size, key_length), dtype=torch.bool, device=device)
+
+    if mask.dim() == 2:
+        valid = mask > 0
+    elif mask.dim() == 3:
+        valid = mask[:, 0, :] > -1 if mask.is_floating_point() and torch.any(mask < 0) else mask[:, 0, :] > 0
+    elif mask.dim() == 4:
+        key_mask = mask[:, 0, 0, :]
+        valid = key_mask > -1 if mask.is_floating_point() else key_mask > 0
+    else:
+        raise ValueError("attention_mask must have 2, 3, or 4 dimensions")
+
+    if valid.shape != (batch_size, key_length):
+        raise ValueError(
+            f"attention mask key shape must be {(batch_size, key_length)}, got {tuple(valid.shape)}"
+        )
+    return valid
 
 
 def force_eager_bert_attention(model: Any) -> Any:
@@ -214,7 +240,13 @@ def attach_sgam_to_bert_attention(
 
             if hasattr(self_module, "sgam") and self_module.sgam is not None and self_module.sgam_addresses is not None:
                 batch_addresses = self_module.sgam_addresses.to(device=hidden_states.device, dtype=hidden_states.dtype)
-                bias = self_module.sgam(batch_addresses, attention_mask)
+                valid_attention_mask = _bert_attention_mask_to_valid(
+                    attention_mask,
+                    batch_size=batch_addresses.shape[0],
+                    key_length=key_layer.shape[2],
+                    device=hidden_states.device,
+                )
+                bias = self_module.sgam(batch_addresses, valid_attention_mask)
                 if bias is not None:
                     attention_scores = attention_scores + bias.to(device=attention_scores.device, dtype=attention_scores.dtype)
 
