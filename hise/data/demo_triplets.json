@@ -1,0 +1,56 @@
+[
+  {
+    "query": "Revenue grew 47% year over year",
+    "positive": "doc_1::Executive Summary",
+    "negative_labels": [
+      "doc_1::Risk Factors",
+      "doc_1::Outlook",
+      "doc_2::Overview"
+    ]
+  },
+  {
+    "query": "Customer concentration risk remains material",
+    "positive": "doc_1::Risk Factors",
+    "negative_labels": [
+      "doc_1::Executive Summary",
+      "doc_1::Outlook",
+      "doc_2::Overview"
+    ]
+  },
+  {
+    "query": "We expect continued expansion in enterprise software",
+    "positive": "doc_1::Outlook",
+    "negative_labels": [
+      "doc_1::Executive Summary",
+      "doc_1::Risk Factors",
+      "doc_2::Overview"
+    ]
+  },
+  {
+    "query": "The platform uses a layered security model",
+    "positive": "doc_2::Overview",
+    "negative_labels": [
+      "doc_1::Executive Summary",
+      "doc_1::Risk Factors",
+      "doc_1::Outlook"
+    ]
+  },
+  {
+    "query": "Access controls limit sensitive operations",
+    "positive": "doc_2::Controls",
+    "negative_labels": [
+      "doc_1::Executive Summary",
+      "doc_1::Risk Factors",
+      "doc_1::Outlook"
+    ]
+  },
+  {
+    "query": "Service logs are reviewed daily",
+    "positive": "doc_2::Monitoring",
+    "negative_labels": [
+      "doc_1::Executive Summary",
+      "doc_1::Risk Factors",
+      "doc_1::Outlook"
+    ]
+  }
+]

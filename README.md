@@ -29,8 +29,19 @@ From the repository root:
 
 ```powershell
 python -m pytest .\hise\tests
+python -m hise demo
+python -m hise eval
 python .\hise\scripts\run_structural_demo.py
 ```
+
+The package can also be imported directly from the repository root via ``import hise`` and ``import hise.config``.
+
+## Active implementation notebooks
+
+- `notebooks/HiSA_PreAttention_Implementation.ipynb` — pre-attention HiSA prototype and math stack
+- `notebooks/02_parsers.ipynb` — Markdown, JSON, HTML, and table parsing to `(m, d, p, s)`
+- `notebooks/03_sgam_injection.ipynb` — SGAM bias and gradient-flow validation
+- `notebooks/04_data_pipeline.ipynb` — synthetic corpus and hard-negative triplet generation
 
 The prototype currently validates the structural-address mechanism. It does not claim measured retrieval improvement until the Nomic embedding baseline and HiSE comparison experiments are completed.
 
