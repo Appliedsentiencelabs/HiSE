@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#3d5afe"/>
+    </marker>
+    <style>
+      .box { fill:#f8fbff; stroke:#3d5afe; stroke-width:2; rx:16; }
+      .sub { fill:#eefaf1; stroke:#2e7d32; stroke-width:2; rx:16; }
+      .eval { fill:#fff4e5; stroke:#ef6c00; stroke-width:2; rx:16; }
+      .label { font: 18px Arial, sans-serif; fill:#1d1d1d; }
+      .small { font: 15px Arial, sans-serif; fill:#1d1d1d; }
+      .arrow { stroke:#3d5afe; stroke-width:2.5; fill:none; marker-end:url(#arrow); }
+    </style>
+  </defs>
+
+  <rect x="40" y="40" width="180" height="90" class="box"/>
+  <text x="130" y="90" text-anchor="middle" class="label">Raw docs</text>
+  <text x="130" y="108" text-anchor="middle" class="small">HTML / JSON / Markdown</text>
+
+  <rect x="270" y="40" width="190" height="90" class="box"/>
+  <text x="365" y="90" text-anchor="middle" class="label">Parser layer</text>
+
+  <rect x="520" y="40" width="220" height="100" class="box"/>
+  <text x="630" y="82" text-anchor="middle" class="label">Structural address</text>
+  <text x="630" y="104" text-anchor="middle" class="small">(m, d, p, s)</text>
+
+  <rect x="220" y="220" width="220" height="110" class="sub"/>
+  <text x="330" y="270" text-anchor="middle" class="label">HiSA</text>
+  <text x="330" y="292" text-anchor="middle" class="small">pre-attention encoder</text>
+
+  <rect x="500" y="220" width="220" height="110" class="sub"/>
+  <text x="610" y="270" text-anchor="middle" class="label">Base embedding</text>
+  <text x="610" y="292" text-anchor="middle" class="small">semantic backbone</text>
+
+  <rect x="380" y="400" width="250" height="110" class="sub"/>
+  <text x="505" y="450" text-anchor="middle" class="label">SGAM</text>
+  <text x="505" y="472" text-anchor="middle" class="small">attention bias before softmax</text>
+
+  <rect x="760" y="220" width="180" height="110" class="eval"/>
+  <text x="850" y="270" text-anchor="middle" class="label">Evaluation</text>
+  <text x="850" y="292" text-anchor="middle" class="small">MRR / SDS / RIR</text>
+
+  <rect x="760" y="400" width="180" height="110" class="eval"/>
+  <text x="850" y="450" text-anchor="middle" class="label">Hard negatives</text>
+  <text x="850" y="472" text-anchor="middle" class="small">triplets and curriculum</text>
+
+  <rect x="40" y="400" width="190" height="110" class="eval"/>
+  <text x="135" y="450" text-anchor="middle" class="label">World graph</text>
+  <text x="135" y="472" text-anchor="middle" class="small">knowledge prior</text>
+
+  <path d="M220 85 L270 85" class="arrow"/>
+  <path d="M460 85 L520 85" class="arrow"/>
+  <path d="M630 140 L630 180 L325 180 L325 220" class="arrow"/>
+  <path d="M630 140 L630 180 L610 180 L610 220" class="arrow"/>
+  <path d="M440 330 L440 400" class="arrow"/>
+  <path d="M630 330 L630 400" class="arrow"/>
+  <path d="M505 510 L505 560 L850 560 L850 330" class="arrow"/>
+  <path d="M230 455 L120 455" class="arrow"/>
+  <path d="M630 330 L850 330" class="arrow"/>
+</svg>

@@ -1,0 +1,20 @@
+flowchart TD
+    A[Raw document / HTML / JSON / Markdown] --> B[Parser layer]
+    B --> C[(m, d, p, s) structural addresses]
+    C --> D[HiSA pre-attention encoder]
+    D --> E[Base embedding model backbone]
+    E --> F[SGAM attention bias]
+    F --> G[Structure-aware retrieval score]
+    G --> H[Evaluation / benchmark / ablations]
+
+    I[World graph / knowledge priors] --> F
+    J[Hard negatives / triplets] --> H
+    K[StructEval-Bench] --> H
+
+    classDef core fill:#eaf2ff,stroke:#3d5afe,stroke-width:1px;
+    classDef math fill:#eefaf1,stroke:#2e7d32,stroke-width:1px;
+    classDef eval fill:#fff4e5,stroke:#ef6c00,stroke-width:1px;
+
+    class A,B,C,D,E core;
+    class F,G math;
+    class H,I,J,K eval;
