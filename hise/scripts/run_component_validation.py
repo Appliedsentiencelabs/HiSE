@@ -84,6 +84,11 @@ WINDOW_SECTIONS = [
         "The audit committee will review compliance next quarter.",
     ),
 ]
+SECTION_COORDINATES = {
+    1: (2, 1, 1),
+    2: (2, 1, 2),
+    3: (1, 2, 1),
+}
 
 THRESHOLDS = {
     "zero_weight_max_abs_diff": 1e-5,
@@ -221,12 +226,11 @@ def labels_to_addresses(
         values = labels[batch_index, indices].cpu()
         if shuffle:
             values = values[torch.randperm(len(values), generator=generator)]
-        counts = {1: 0, 2: 0, 3: 0}
         for token_index, section in zip(indices.tolist(), values.tolist()):
-            result[batch_index, token_index, 1] = 1 if section != 2 else 2
-            result[batch_index, token_index, 2] = section
-            result[batch_index, token_index, 3] = counts[section]
-            counts[section] += 1
+            depth, parent_id, sibling_index = SECTION_COORDINATES[section]
+            result[batch_index, token_index, 1:] = torch.tensor(
+                [depth, parent_id, sibling_index], dtype=result.dtype, device=result.device
+            )
     return result
 
 
@@ -267,11 +271,12 @@ def attention_diagnostics(
         nonself_content = valid[:, None] & valid[None, :]
         nonself_content.fill_diagonal_(False)
         section_sizes = torch.stack([(label_row == section).sum() for section in (1, 2, 3)])
+        query_section_sizes = section_sizes[label_row[token_indices] - 1]
         expected_by_query = torch.where(
-            section_sizes[label_row[token_indices] - 1] > 1,
-            (section_sizes[label_row[token_indices] - 1] - 1).float()
+            query_section_sizes > 1,
+            (query_section_sizes - 1).float()
             / max(int(valid.sum().item()) - 1, 1),
-            torch.zeros_like(section_sizes[label_row[token_indices]], dtype=torch.float32),
+            torch.zeros_like(query_section_sizes, dtype=torch.float32),
         )
         sep_positions = (input_ids[batch_index] == sep_token_id) & attention_mask[batch_index].bool()
         metric_values = []
@@ -970,6 +975,10 @@ def main() -> None:
     report["attention_shift"] = {
         "metric": "for each valid text token, sum attention probabilities to non-self valid text tokens in its true section; average queries, heads, then layers",
         "address_source": "fast tokenizer offset_mapping intersected with each handwritten section character span",
+        "synthetic_section_coordinates": {
+            str(section): {"depth": coords[0], "parent_id": coords[1], "sibling_index": coords[2]}
+            for section, coords in SECTION_COORDINATES.items()
+        },
         "offset_mapping": offset_records,
         "grid": grid_rows,
         "zero_control_max_difference": zero_control_difference,
@@ -1043,6 +1052,10 @@ def main() -> None:
         "attention_shift": max(row["windows_meeting_gate"] for row in grid_rows)
         >= THRESHOLDS["attention_shift_windows"],
         "shuffled_control": report["attention_shift"]["shuffled_control"]["passed"],
+        "shuffled_control_legacy": max(
+            report["attention_shift"]["shuffled_control"]["legacy_including_diagonal_gains"]
+        )
+        <= THRESHOLDS["shuffled_true_section_max_gain"],
         "zero_weight_control": zero_control_difference == 0.0,
         "shared_gradient_step": report["gradients"][0]["unique_parameters"] == 3
         and report["gradients"][0]["nonzero_gradient_count"] == report["gradients"][0]["checked_gradient_count"]
