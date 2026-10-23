@@ -59,6 +59,16 @@ For the stricter component evidence report, run:
 
 This also records per-notebook kernel executables, checks hook activation after a fresh model reload and in train mode, reports per-sentence zero-weight equivalence and per-layer attention-shift metrics with shuffled-label controls, executes shared/per-layer SGAM optimizer steps, and compares stock-SDPA, stock-eager, and hooked GPU overhead. It requires CUDA and the locally cached model. The generated `Dcoumentation/reports/evidence_report.json` and `evidence_report.md` are component-validation evidence only; retrieval quality and training convergence are not tested.
 
+## Embedding vector space
+
+The variable definitions and interpretation guide are in `../Documentation/Embedding_Vector_Space.md`. To run the small local BGE probe and generate vector-space plots plus raw embedding arrays:
+
+```powershell
+.\hise\.venv\Scripts\python.exe .\hise\scripts\analyze_embedding_vector_space.py
+```
+
+It compares plain candidate text with section-path-prefixed candidate text on ten handcrafted structural pairs. This is an exploratory mechanism probe, not a held-out retrieval benchmark or trained HiSE/SGAM result. Outputs are written to `../Documentation/reports/vector_space/`.
+
 ## Current notebook sequence
 
 - `notebooks/HiSA_PreAttention_Implementation.ipynb` — pre-attention HiSA prototype and math stack
